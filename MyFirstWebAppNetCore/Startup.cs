@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MyFirstWebAppNetCore.Entities;
 
 namespace MyFirstWebAppNetCore
 {
@@ -26,6 +28,8 @@ namespace MyFirstWebAppNetCore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            var connectionString = "Data Source=Task.db";
+            services.AddDbContext<TaskDbContext>(options => options.UseSqlite(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
